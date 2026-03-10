@@ -1,15 +1,17 @@
 {
-  "name": "final-project",
+  "name": "foodhub",
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec tsx src/app.ts"
+    "dev": "nodemon --exec tsx src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
   },
   "keywords": [],
-  "author": "Saad And Suraish",
+  "author": "Suraish",
   "license": "ISC",
-  "description": "Our Fiirst Project for Full Stack Development Course",
+  "description": "My first Full Stack Development project",
   "dependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/cookie-parser": "^1.4.10",
