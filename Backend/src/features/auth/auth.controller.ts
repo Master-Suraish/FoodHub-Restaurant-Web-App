@@ -118,15 +118,15 @@ export const loginUser = async (req: Request, res: Response) => {
 
     res.cookie("token", accessToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       maxAge: 60 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false, 
-      sameSite: "lax",
+      secure: true, 
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -214,15 +214,15 @@ export const loginAdmin = async (req: Request, res: Response) => {
 
     res.cookie("token", accessToken, {
       httpOnly: true,
-      secure: false, 
-      sameSite: "lax",
+      secure: true, 
+      sameSite: "none",
       maxAge: 60 * 60 * 1000, 
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: false, 
-      sameSite: "lax",
+      secure: true, 
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000, 
     });
 
