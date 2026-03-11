@@ -13,7 +13,7 @@ export const sendEmail = async (to: string, token: string) => {
     },
   });
 
-  const verifyUrl = `http://localhost:5173/verify-email/${token}`;
+  const verifyUrl = `${process.env.FRONTEND_URL}/verify-email/${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
