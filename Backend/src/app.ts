@@ -13,7 +13,7 @@ import cartRoutes from "./features/carts/cart.routes";
 import contactRoutes from "./features/contact/contact.route";
 import { connectingToMongoDB } from "./config/mongodb";
 import { checkJWT } from "./middlewares/auth.middleware";
-import authRoutes from "../src/features/auth/auth.routes";
+import authRoutes from "./features/auth/auth.routes";
 import { publicLimiter, userLimiter } from "./middlewares/rateLimiter";
 
 const app = express();
