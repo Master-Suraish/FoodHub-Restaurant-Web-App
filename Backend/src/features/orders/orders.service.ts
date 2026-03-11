@@ -25,7 +25,7 @@ export const getOrderById = (id: string) => {
     .populate("address");
 };
 
-export const updateOrderStatus = (id: string, status: string) => {
+export const updateOrderStatus = (id: string, status: string | undefined) => {
   return Order.findByIdAndUpdate(
     id,
     { status },

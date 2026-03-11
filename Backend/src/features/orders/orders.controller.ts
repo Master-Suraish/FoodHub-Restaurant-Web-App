@@ -9,6 +9,7 @@ import {
 import { sendOrderEmail } from "../../utils/sendEmail";
 import usersModel from "../users/users.model";
 import { AuthRequest } from "../../@types/auth.request";
+import { Server } from "socket.io";
 
 export const createOrder = async (req: Request, res: Response) => {
   const { success, error, data } = createOrderSchema.safeParse(req.body);
@@ -187,7 +188,7 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
       });
     }
 
-    const io = req.app.get("socketio");
+    const io = req.app.get("socketio") as Server;
 
     const orderId = paramParse.data.id.toString();
 

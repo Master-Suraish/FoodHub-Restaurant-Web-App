@@ -247,7 +247,8 @@ export const loginAdmin = async (req: Request, res: Response) => {
 
 export const verifyEmail = async (req: Request, res: Response) => {
   try {
-    const { token } = req.params;
+    // const { token } = req.params;
+    const token = req.params.token as string;
 
     const decoded = jwtCampare(token);
 
