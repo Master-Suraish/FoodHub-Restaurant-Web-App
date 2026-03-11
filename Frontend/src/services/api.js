@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const API_BASE_URL = "http://localhost:3001/api";
-const API_BASE_URL = `${import.meta.env.BACKEND_RAILWAY_URL}/api`;
+const API_BASE_URL = `${import.meta.env.VITE_BACKEND_RAILWAY_URL}/api`;
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
