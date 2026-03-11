@@ -14,7 +14,7 @@ import {
   ReceiptText,
 } from "lucide-react";
 
-const socket = io("https://foodhub-restaurant.up.railway.app", {
+const socket = io(import.meta.env.VITE_BACKEND_RAILWAY_URL, {
   withCredentials: true,
 });
 

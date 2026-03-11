@@ -56,7 +56,7 @@ export default function OrdersPage() {
     });
   };
 
-  const socket = io(import.meta.env.BACKEND_RAILWAY_URL, {
+  const socket = io(import.meta.env.VITE_BACKEND_RAILWAY_URL, {
     withCredentials: true,
   });
 
