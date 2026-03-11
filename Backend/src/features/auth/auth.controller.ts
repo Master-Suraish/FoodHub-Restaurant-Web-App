@@ -153,15 +153,17 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const logoutUser = async (req: Request, res: Response) => {
   try {
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
     });
     res.clearCookie("refreshToken", {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
     });
 
     res.status(200).json({
@@ -214,17 +216,20 @@ export const loginAdmin = async (req: Request, res: Response) => {
     const accessToken = generateJWT(payload);
     const refreshToken = generateRefreshToken(payload);
 
+    const isProduction = process.env.NODE_ENV === "production";
+
+
     res.cookie("token", accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: isProduction,
+      sameSite:  isProduction ? "none" : "lax",,
       maxAge: 60 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: isProduction,
+      sameSite:  isProduction ? "none" : "lax",,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -322,10 +327,12 @@ export const refreshToken = async (req: Request, res: Response) => {
     };
     const newAccessToken = generateJWT(payload);
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("token", newAccessToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 60 * 60 * 1000,
     });
 
