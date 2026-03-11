@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import { ToastProvider } from "./context/ToastContext.jsx";
 
 import "./index.css";
@@ -12,13 +12,13 @@ if (!root) throw new Error("Root element not found");
 
 createRoot(root).render(
   <ToastProvider>
-    <BrowserRouter
+    <HashRouter
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true,
       }}
     >
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </ToastProvider>,
 );

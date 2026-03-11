@@ -10,7 +10,7 @@ import {
 import adminModel from "../admin/admin.model";
 import { generateEmailToken, jwtCampare } from "../../utils/jwt";
 import { sendEmail } from "../../utils/sendEmail";
-import {AuthRequest} from "../../@types/auth.request"
+import { AuthRequest } from "../../@types/auth.request";
 
 export async function registorUser(req: Request, res: Response) {
   try {
@@ -116,17 +116,19 @@ export const loginUser = async (req: Request, res: Response) => {
     const accessToken = generateJWT(payload);
     const refreshToken = generateRefreshToken(payload);
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("token", accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 60 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true, 
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -153,12 +155,12 @@ export const logoutUser = async (req: Request, res: Response) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: false, 
+      secure: false,
       sameSite: "lax",
     });
     res.clearCookie("refreshToken", {
       httpOnly: true,
-      secure: false, 
+      secure: false,
       sameSite: "lax",
     });
 
@@ -214,22 +216,22 @@ export const loginAdmin = async (req: Request, res: Response) => {
 
     res.cookie("token", accessToken, {
       httpOnly: true,
-      secure: true, 
+      secure: true,
       sameSite: "none",
-      maxAge: 60 * 60 * 1000, 
+      maxAge: 60 * 60 * 1000,
     });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: true, 
+      secure: true,
       sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000, 
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
       success: true,
       message: "Admin login successfully!",
-      
+
       user: {
         _id: user._id,
         name: user.name,
@@ -322,9 +324,9 @@ export const refreshToken = async (req: Request, res: Response) => {
 
     res.cookie("token", newAccessToken, {
       httpOnly: true,
-      secure: false, 
+      secure: false,
       sameSite: "lax",
-      maxAge: 60 * 60 * 1000, 
+      maxAge: 60 * 60 * 1000,
     });
 
     res.json({ success: true, message: "Access token refreshed" });
