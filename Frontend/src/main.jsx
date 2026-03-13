@@ -12,13 +12,13 @@ if (!root) throw new Error("Root element not found");
 
 createRoot(root).render(
   <ToastProvider>
-    <HashRouter
+    <BrowserRouter
       future={{
         v7_startTransition: true,
         v7_relativeSplatPath: true,
       }}
     >
       <App />
-    </HashRouter>
+    </BrowserRouter>
   </ToastProvider>,
 );

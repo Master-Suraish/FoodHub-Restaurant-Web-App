@@ -1,4 +1,5 @@
 import { useState } from "react";
+import {Link} from "react-router-dom"
 import {
   Menu,
   X,
@@ -39,7 +40,7 @@ export default function AdminNavbar({ user, handleLogout }) {
           {/* CENTER: DESKTOP LINKS */}
           <div className="hidden md:flex items-center justify-center gap-10 flex-[2]">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 className="text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-all flex items-center gap-2 group"
@@ -48,7 +49,7 @@ export default function AdminNavbar({ user, handleLogout }) {
                   {link.icon}
                 </span>
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -119,7 +120,7 @@ export default function AdminNavbar({ user, handleLogout }) {
             </div>
           )}
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
               href={link.href}
               className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-slate-900/50 text-slate-300 font-bold text-sm hover:bg-orange-500 hover:text-white transition-all"
@@ -128,7 +129,7 @@ export default function AdminNavbar({ user, handleLogout }) {
                 {link.icon}
               </span>
               {link.name}
-            </a>
+            </Link>
           ))}
           <button
             onClick={handleLogout}
