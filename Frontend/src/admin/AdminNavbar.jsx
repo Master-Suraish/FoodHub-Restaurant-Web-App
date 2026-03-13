@@ -42,7 +42,7 @@ export default function AdminNavbar({ user, handleLogout }) {
             {navLinks.map((link) => (
               <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="text-[11px] font-black uppercase tracking-widest text-slate-400 hover:text-white transition-all flex items-center gap-2 group"
               >
                 <span className="text-slate-500 group-hover:text-orange-500 transition-colors">
@@ -122,7 +122,7 @@ export default function AdminNavbar({ user, handleLogout }) {
           {navLinks.map((link) => (
             <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="flex items-center gap-4 px-4 py-4 rounded-2xl bg-slate-900/50 text-slate-300 font-bold text-sm hover:bg-orange-500 hover:text-white transition-all"
             >
               <span className="text-orange-500 group-hover:text-white">
