@@ -95,7 +95,7 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!isMatch) {
       return res.status(400).json({
         success: false,
-        message: "Password is miss matched",
+        message: "Email & Password is miss matched",
       });
     }
 
@@ -205,7 +205,7 @@ export const loginAdmin = async (req: Request, res: Response) => {
     if (!isCorrect) {
       return res.status(400).json({
         success: false,
-        message: "Password is miss matched",
+        message: "Email & Password is miss matched",
       });
     }
 

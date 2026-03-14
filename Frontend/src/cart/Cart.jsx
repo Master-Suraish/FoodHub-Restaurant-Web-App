@@ -487,14 +487,14 @@ function OrderForm({
           <button
             type="button"
             onClick={onBackToCart}
-            className="flex-1 py-4 text-slate-500 hover:text-slate-900 font-black rounded-2xl border-2 border-slate-100 hover:border-slate-300 transition-all uppercase text-[10px] tracking-widest"
+            className="flex-1 py-4 text-slate-500 hover:text-slate-900 font-black rounded-2xl border-2 border-slate-100 hover:border-slate-300 transition-all uppercase text-xs tracking-widest"
           >
             Back to Cart
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="flex-[2] py-4 bg-orange-500 text-white font-black rounded-2xl shadow-lg shadow-orange-200 hover:bg-slate-900 transition-all uppercase text-[10px] tracking-widest"
+            className={`flex-[2] py-4  text-white font-black rounded-2xl shadow-lg shadow-orange-200 hover:bg-slate-900 transition-all uppercase text-xs tracking-widest ${loading ? "bg-orange-700" : "bg-orange-500"}`}
           >
             {loading ? "Processing..." : "Confirm Order"}
           </button>

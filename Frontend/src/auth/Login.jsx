@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { authAPI } from "../services/api";
 import { Mail, Lock, LogIn, ArrowRight } from "lucide-react";
 import { useToast } from "../context/ToastContext";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function Login({ setUserAfterLogin }) {
   const showToast = useToast();
@@ -10,6 +11,7 @@ export default function Login({ setUserAfterLogin }) {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -78,7 +80,7 @@ export default function Login({ setUserAfterLogin }) {
             </div>
 
             {/* Password Field */}
-            <div className="space-y-1">
+            {/* <div className="space-y-1">
               <div className="flex justify-between items-center ml-1">
                 <label className="text-sm font-semibold text-gray-700">
                   Password
@@ -103,7 +105,41 @@ export default function Login({ setUserAfterLogin }) {
                   className={`w-full pl-10 pr-4 py-3 bg-gray-50 border-2 rounded-xl outline-none transition-all duration-200`}
                 />
               </div>
-            </div>
+            </div> */}
+
+            <div className="space-y-1">
+                <label className="text-sm font-semibold text-gray-700 ml-1">
+                  Password
+                </label>
+                <div className="relative group">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400 group-focus-within:text-indigo-600 transition-colors">
+                    <Lock size={18} />
+                  </div>
+                  <div className="relative group">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                      <Lock size={18} />
+                    </div>
+
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      className={`w-full pl-10 pr-4 py-3 bg-gray-50 border-2 rounded-xl outline-none transition-all duration-200`}
+                    />
+
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400"
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
+                
+              </div>
 
             {/* Remember Me */}
             <div className="py-1">
