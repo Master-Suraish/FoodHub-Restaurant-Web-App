@@ -30,7 +30,7 @@ export const userZodSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
-    path: ["confirmPassword"], // error will show on this field
+    path: ["confirmPassword"], 
   });
 
 export const loginZodSchema = z.object({
