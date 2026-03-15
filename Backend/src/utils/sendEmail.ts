@@ -24,14 +24,14 @@ async function sendMail() {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        type: "OAUTH2",
+        type: "OAuth2",
         user: process.env.EMAIL_USER,
         clientId: process.env.CLIENT_ID,
         clientSecret: process.env.CLIENT_SECRET,
         refreshToken: process.env.REFRESH_TOKEN,
         accessToken: accessToken,
       },
-    });
+    } as any);
 
     const mailOptions = {
       from: "SURAISH <sureshkamar3000@gmail.com>",
