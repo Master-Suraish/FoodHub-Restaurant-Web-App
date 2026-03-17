@@ -1,7 +1,222 @@
-export const verifyEmailTemplate = (verifyUrl: string) => {
-  const orange500 = "#f97316"; 
-  const slate900 = "#0f172a"; 
-  const slate50 = "#f8fafc"; 
+export const adminVerifyUserTemplate = (
+  userName: string,
+  userEmail: string,
+  verifyUrl: string,
+) => {
+  const orange500 = "#f97316";
+  const slate900 = "#0f172a";
+  const slate50 = "#f8fafc";
+
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin: New User Approval</title>
+  </head>
+  <body style="margin:0; padding:0; background-color:#ffffff; font-family: 'Inter', system-ui, sans-serif;">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" style="padding:40px 20px;">
+      <tr>
+        <td align="center">
+          
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+            <tr>
+              <td align="center">
+                <div style="font-size: 32px; font-weight: 900; letter-spacing: -1.5px; color: ${slate900}; text-decoration: none;">
+                  Food<span style="color: ${orange500};">Hub</span>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <table width="550" cellpadding="0" cellspacing="0" 
+            style="background-color: ${slate50}; 
+                   border-top: 6px solid ${orange500}; 
+                   border-radius: 32px; 
+                   padding: 50px 40px; 
+                   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05); 
+                   border-left: 1px solid #e2e8f0; 
+                   border-right: 1px solid #e2e8f0; 
+                   border-bottom: 1px solid #e2e8f0;">
+            
+            <tr>
+              <td align="center">
+                <h2 style="color:${slate900}; font-size: 28px; font-weight: 900; margin-bottom:10px; margin-top: 0; letter-spacing: -0.5px; font-style: italic;">
+                  New User Registration
+                </h2>
+                
+                <p style="color:#475569; font-size:16px; line-height:1.6; margin-bottom: 30px;">
+                  A new user has registered and is waiting for your approval to access the platform.
+                </p>
+
+                <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border: 2px solid ${slate900}; border-radius: 20px; margin-bottom: 35px; text-align: left;">
+                  <tr>
+                    <td style="padding: 20px;">
+                      <div style="font-size: 10px; font-weight: 900; color: #94a3b8; text-transform: uppercase; tracking-widest: 2px; margin-bottom: 4px;">User Name</div>
+                      <div style="font-size: 16px; font-weight: 900; color: ${slate900}; margin-bottom: 15px; text-transform: uppercase; font-style: italic;">${userName}</div>
+                      
+                      <div style="font-size: 10px; font-weight: 900; color: #94a3b8; text-transform: uppercase; tracking-widest: 2px; margin-bottom: 4px;">Email Address</div>
+                      <div style="font-size: 16px; font-weight: 900; color: ${orange500};">${userEmail}</div>
+                    </td>
+                  </tr>
+                </table>
+
+                <a href="${verifyUrl}" 
+                   style="
+                     background-color:${slate900};
+                     color:#ffffff;
+                     padding:20px 45px;
+                     text-decoration:none;
+                     font-size:14px;
+                     font-weight: 900;
+                     border-radius: 20px;
+                     display:inline-block;
+                     letter-spacing: 2px;
+                     text-transform: uppercase;
+                   ">
+                  Approve & Verify User
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" style="padding-top: 40px;">
+                <p style="color:#94a3b8; font-size:12px;">
+                  This is an administrative action. If you don't recognize this user, please ignore this email.<br>
+                  <a href="${verifyUrl}" style="color:${orange500}; text-decoration: none; word-break: break-all;">${verifyUrl}</a>
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <table width="550" cellpadding="0" cellspacing="0" style="margin-top: 30px;">
+            <tr>
+              <td align="center">
+                <p style="color:#94a3b8; font-size:12px;">
+                  © ${new Date().getFullYear()} <strong>FoodHub Admin Panel</strong>. Internal Use Only.
+                </p>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </body>
+  </html>
+  `;
+};
+
+export const userVerifiedSuccessTemplate = (name: string, loginUrl: string) => {
+  const orange500 = "#f97316";
+  const slate900 = "#0f172a";
+  const slate50 = "#f8fafc";
+
+  return `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta charset="utf-8">
+    <title>Account Verified - FoodHub</title>
+  </head>
+  <body style="margin:0; padding:0; background-color:#ffffff; font-family: 'Inter', system-ui, sans-serif;">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" style="padding:40px 20px;">
+      <tr>
+        <td align="center">
+          
+          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px;">
+            <tr>
+              <td align="center">
+                <div style="font-size: 32px; font-weight: 900; letter-spacing: -1.5px; color: ${slate900}; text-decoration: none;">
+                  Food<span style="color: ${orange500};">Hub</span>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <table width="550" cellpadding="0" cellspacing="0" 
+            style="background-color: ${slate50}; 
+                   border-top: 6px solid ${orange500}; 
+                   border-radius: 32px; 
+                   padding: 60px 40px; 
+                   box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05); 
+                   border-left: 1px solid #e2e8f0; 
+                   border-right: 1px solid #e2e8f0; 
+                   border-bottom: 1px solid #e2e8f0;">
+            
+            <tr>
+              <td align="center">
+                <div style="width: 80px; height: 80px; background-color: ${orange500}; border-radius: 24px; margin-bottom: 30px; display: table;">
+                    <span style="display: table-cell; vertical-align: middle; color: #ffffff; font-size: 40px; font-weight: 900;">✓</span>
+                </div>
+
+                <h2 style="color:${slate900}; font-size: 32px; font-weight: 900; margin-bottom:16px; margin-top: 0; letter-spacing: -1px; italic;">
+                  You're Approved!
+                </h2>
+                
+                <p style="color:#475569; font-size:18px; line-height:1.6; margin-bottom: 10px;">
+                  Hey <strong>${name}</strong>,
+                </p>
+
+                <p style="color:#475569; font-size:16px; line-height:1.6; margin-bottom: 35px;">
+                  Great news! Your account has been manually verified by our team. You now have full access to explore and order the best meals in town.
+                </p>
+
+                <a href="${loginUrl}" 
+                   style="
+                     background-color:${slate900};
+                     color:#ffffff;
+                     padding:20px 45px;
+                     text-decoration:none;
+                     font-size:14px;
+                     font-weight: 900;
+                     border-radius: 20px;
+                     display:inline-block;
+                     letter-spacing: 2px;
+                     text-transform: uppercase;
+                     box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+                   ">
+                  Start Exploring Now
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" style="padding-top: 50px;">
+                <div style="height: 1px; width: 100px; background-color: #e2e8f0; margin-bottom: 20px;"></div>
+                <p style="color:#94a3b8; font-size:13px; font-style: italic;">
+                  We're excited to have you in the community!
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <table width="550" cellpadding="0" cellspacing="0" style="margin-top: 30px;">
+            <tr>
+              <td align="center">
+                <p style="color:#94a3b8; font-size:12px;">
+                  © ${new Date().getFullYear()} <strong>FoodHub</strong>. All rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+
+        </td>
+      </tr>
+    </table>
+  </body>
+  </html>
+  `;
+};
+
+export const verifyEmailTemplate = (
+  name: string,
+  email: string,
+  verifyUrl: string,
+) => {
+  const orange500 = "#f97316";
+  const slate900 = "#0f172a";
+  const slate50 = "#f8fafc";
 
   return `
   <!DOCTYPE html>
@@ -95,9 +310,9 @@ export const orderConfirmationTemplate = (order: any) => {
   const USD_TO_PKR = 280;
   const priceInPKR = order.totalPrice * USD_TO_PKR;
 
-  const orange500 = "#f97316"; 
-  const slate900 = "#0f172a"; 
-  const slate50 = "#f8fafc"; 
+  const orange500 = "#f97316";
+  const slate900 = "#0f172a";
+  const slate50 = "#f8fafc";
 
   const items = order.items
     .map(

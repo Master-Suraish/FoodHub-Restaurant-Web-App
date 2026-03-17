@@ -9,7 +9,7 @@ import {
 } from "../../utils/jwt";
 import adminModel from "../admin/admin.model";
 import { generateEmailToken, jwtCampare } from "../../utils/jwt";
-import { sendEmail } from "../../utils/sendEmail";
+// import { notifyAdminOfSignup } from "../../utils/sendEmail";
 import { AuthRequest } from "../../@types/auth.request";
 
 export async function registorUser(req: Request, res: Response) {
@@ -47,7 +47,7 @@ export async function registorUser(req: Request, res: Response) {
 
     const emailToken = generateEmailToken(newUser._id.toString());
 
-    await sendEmail(newUser.email, emailToken);
+    // await notifyAdminOfSignup(newUser.name, newUser.email, emailToken);
 
     return res.status(201).json({
       success: true,

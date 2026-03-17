@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiClient } from "../services/api";
 import { useToast } from "../context/ToastContext";
 import { Eye, EyeOff } from "lucide-react";
+import { sendVerificationEmail } from "../utils/emailService";
 
 import {
   User,
@@ -53,10 +54,17 @@ export default function Signup() {
         experience: Number(formData.experience),
       });
 
-      showToast("User created successfully", "success");
-      setTimeout(() => {
-        navigate("/login");
-      }, 4000);
+      
+        const verifyUrl = `${import.meta.env.VITE_FRONTEND_URL}/verify-email/${response.data.emailToken}`;
+
+        await sendVerificationEmail(formData.email, verifyUrl);
+
+        // alert("Check your email to verify your account!");
+        showToast("User created successfully", "success");
+        setTimeout(() => {
+          navigate("/login");
+        }, 4000);
+      
     } catch (error) {
       const data = error?.response?.data;
 
