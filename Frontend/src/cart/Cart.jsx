@@ -12,8 +12,9 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { useToast } from "../context/ToastContext";
+import { sendOrderEmail } from "../utils/emailService";
 
-export default function Cart({ foods }) {
+export default function Cart({ foods, user }) {
   const showToast = useToast();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -335,6 +336,7 @@ export default function Cart({ foods }) {
         ) : (
           <OrderForm
             cartItems={cartItems}
+            user={user}
             totalPrice={totalPrice}
             totalItems={totalItems}
             selectedAddressId={selectedAddressId}
@@ -353,11 +355,13 @@ function OrderForm({
   cartItems,
   totalPrice,
   totalItems,
+  user,
   selectedAddressId,
   selectedAddressDetails,
   onBackToCart,
   clearCart,
 }) {
+  const showToast = useToast();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     paymentMethod: "card",
@@ -388,6 +392,23 @@ function OrderForm({
       const response = await orderAPI.createOrder(orderData);
       setOrderId(response.data.data._id);
       setOrderPlaced(true);
+      // console.log("order placed!", response.data.data);
+
+      try {
+        await sendOrderEmail(user.email, response.data.data);
+        showToast("Order confirmation sent!", "success");
+      } catch (error) {
+        if (error.status === 413) {
+          showToast(
+            "Order confirmed! (Email limit reached, but your meal is being prepared)",
+            "success",
+          );
+        } else {
+          showToast("Failed to send email. Please try again.", "error");
+        }
+        console.error("Email Error:", error);
+      }
+
       clearCart();
     } catch (err) {
       console.error(err);

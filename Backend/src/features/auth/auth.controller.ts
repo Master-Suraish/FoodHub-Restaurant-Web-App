@@ -9,8 +9,9 @@ import {
 } from "../../utils/jwt";
 import adminModel from "../admin/admin.model";
 import { generateEmailToken, jwtCampare } from "../../utils/jwt";
-// import { notifyAdminOfSignup } from "../../utils/sendEmail";
 import { AuthRequest } from "../../@types/auth.request";
+//* Comment Backend Email Sending (Go to utils/sendEmails.ts to know the reason)
+// import { sendEmail } from "../../utils/sendEmail";
 
 export async function registorUser(req: Request, res: Response) {
   try {
@@ -47,8 +48,7 @@ export async function registorUser(req: Request, res: Response) {
 
     const emailToken = generateEmailToken(newUser._id.toString());
 
-    // await notifyAdminOfSignup(newUser.name, newUser.email, emailToken);
-
+    // await sendEmail(newUser.email, emailToken); //* Comment Backend Email Sending (Go to utils/sendEmails.ts to know the reason)
     return res.status(201).json({
       success: true,
       message: "User created successfully",

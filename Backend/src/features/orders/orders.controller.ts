@@ -6,10 +6,11 @@ import {
   updateOrderStatusSchema,
   orderParamSchema,
 } from "./orders.validation";
-import { sendOrderEmail } from "../../utils/sendEmail";
 import usersModel from "../users/users.model";
 import { AuthRequest } from "../../@types/auth.request";
 import { Server } from "socket.io";
+//* Comment Backend Email Sending (Go to utils/sendEmails.ts to know the reason)
+// import { sendOrderEmail } from "../../utils/sendEmail";
 
 export const createOrder = async (req: Request, res: Response) => {
   const { success, error, data } = createOrderSchema.safeParse(req.body);
@@ -41,9 +42,10 @@ export const createOrder = async (req: Request, res: Response) => {
 
     const user = await usersModel.findById((req as any).user._id);
 
-    if (order && user?.email) {
-      await sendOrderEmail(user.email, order);
-    }
+    //* Comment Backend Email Sending (Go to utils/sendEmails.ts to know the reason)
+    // if (order && user?.email) {
+    //   await sendOrderEmail(user.email, order);
+    // }
 
     return res.status(201).json({
       success: true,

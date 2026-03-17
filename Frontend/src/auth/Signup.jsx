@@ -54,17 +54,14 @@ export default function Signup() {
         experience: Number(formData.experience),
       });
 
-      
-        const verifyUrl = `${import.meta.env.VITE_FRONTEND_URL}/verify-email/${response.data.emailToken}`;
+      const verifyUrl = `${import.meta.env.VITE_FRONTEND_URL}/verify-email/${response.data.emailToken}`;
 
-        await sendVerificationEmail(formData.email, verifyUrl);
+      await sendVerificationEmail(formData.email, verifyUrl);
 
-        // alert("Check your email to verify your account!");
-        showToast("User created successfully", "success");
-        setTimeout(() => {
-          navigate("/login");
-        }, 4000);
-      
+      showToast("User created successfully", "success");
+      setTimeout(() => {
+        navigate("/login");
+      }, 4000);
     } catch (error) {
       const data = error?.response?.data;
 

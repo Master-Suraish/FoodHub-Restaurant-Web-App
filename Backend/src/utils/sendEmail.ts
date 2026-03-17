@@ -1,98 +1,50 @@
-import nodemailer from "nodemailer";
-import { Resend } from "resend";
-// import dotenv from "dotenv";
-// dotenv.config();
+//* -------- Backend Email Sending logic (NODEMAILER) --------
+/* 
+! Why is Backend Email (Nodemailer/Resend) commented out?
+? 1. SMTP Port Restrictions: Most cloud providers (Railway/Render) block outgoing SMTP ports.
+? 2. Domain Verification: Services like Resend require a verified custom domain to send to multiple recipients.
+? 3. Solution: Implemented EmailJS on the Frontend to handle production-ready transactional emails without the need for a dedicated mail server or custom domain.
+*/
 
-import {
-  verifyEmailTemplate,
-  orderConfirmationTemplate,
-  adminVerifyUserTemplate,
-} from "../utils/emailTemplates";
+// import nodemailer from "nodemailer";
+// import {
+//   verifyEmailTemplate,
+//   orderConfirmationTemplate,
+// } from "../utils/emailTemplates";
 
-// (async function () {
-//   const resend = new Resend(process.env.RESEND_API_KEY);
-//   const { data, error } = await resend.emails.send({
-//     from: "Email by Resend <onboarding@resend.dev>",
-//     to: [process.env.EMAIL_USER as string],
-//     subject: "Hello World",
-//     html: "<strong>It works!</strong>",
+// export const sendEmail = async (to: string, token: string) => {
+//   const transporter = nodemailer.createTransport({
+//     service: "gmail",
+//     auth: {
+//       user: process.env.EMAIL_USER,
+//       pass: process.env.EMAIL_PASS,
+//     },
 //   });
 
-//   if (error) {
-//     return console.error({ error });
-//   }
+//   // const verifyUrl = `http://localhost:3000/api/auth/verify-email/${token}`;
+//   const verifyUrl = `http://localhost:5173/verify-email/${token}`;
 
-//   console.log({ data });
-// })();
-
-// export const notifyAdminOfSignup = async (
-//   name: string,
-//   to: string,
-//   token: string,
-// ) => {
-//   try {
-//     const resend = new Resend(process.env.RESEND_API_KEY);
-
-//     const verifyUrl = `${process.env.FRONTEND_URL}/verify-email/${token}`;
-
-//     const { data, error } = await resend.emails.send({
-//       from: "Email by Resend <onboarding@resend.dev>",
-//       to: [process.env.EMAIL_USER as string],
-//       subject: `New Signup Request from ${name}`,
-//       html: adminVerifyUserTemplate(name, to, verifyUrl),
-//     });
-
-//     if (error) {
-//       return console.error({ error });
-//     } else {
-//       console.log({ data });
-//     }
-//     console.log(`Your verify email send to admin:  ${to}`);
-//   } catch (error: any) {
-//     console.error("Failed to send verify email to admin ", error.message);
-//   }
+//   await transporter.sendMail({
+//     from: process.env.EMAIL_USER,
+//     to,
+//     subject: "Verify Your FoodHub Account",
+//     html: verifyEmailTemplate(verifyUrl),
+//   });
 // };
 
-// sendEmail("another@gmail.com","abc")
-// export const sendEmail = async (to: string, token: string) => {
-//   try {
-//     const resend = new Resend(process.env.RESEND_API_KEY);
-//     const verifyUrl = `${process.env.FRONTEND_URL}/verify-email/${token}`;
-//     const { data, error } = await resend.emails.send({
-//       from: "Website <website@resend.dev>",
-//       to: [to],
-//       subject: "Verify Your FoodHub Account",
-//       html: "email verify",
-//     });
-//     if (error) {
-//       return console.error({ error });
-//     } else {
-//       console.log(data);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//   }
+// export const sendOrderEmail = async (to: string, order: any) => {
+//   const transporter = nodemailer.createTransport({
+//     service: "gmail",
+//     auth: {
+//       user: process.env.EMAIL_USER,
+//       pass: process.env.EMAIL_PASS,
+//     },
+//   });
+
+//   await transporter.sendMail({
+//     from: process.env.EMAIL_USER,
+//     to,
+//     subject: "Your FoodHub Order Confirmation",
+//     html: orderConfirmationTemplate(order),
+//   });
 // };
-
-export const sendOrderEmail = async (to: string, order: any) => {
-  try {
-    // const transporter = createTransporter();
-
-    // await transporter.sendMail({
-    //   from: process.env.EMAIL_USER,
-    //   to,
-    //   subject: "Your FoodHub Order Confirmation",
-    //   html: orderConfirmationTemplate(order),
-    // });
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: process.env.EMAIL_USER as string,
-      to,
-      subject: "Your FoodHub Order Confirmation",
-      html: orderConfirmationTemplate(order),
-    });
-    console.log("Order email sent to:", to);
-  } catch (error: any) {
-    console.error("Order email failed", error.message);
-  }
-};

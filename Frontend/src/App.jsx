@@ -43,6 +43,8 @@ function App() {
     setUser(userData);
   };
 
+  
+
   const handleLogout = async () => {
     try {
       await authAPI.logout();
@@ -119,10 +121,8 @@ function App() {
               <ProtectedRoute>
                 <Cart
                   foods={foods}
-                  cartItems={cartItems}
-                  removeFromCart={removeFromCart}
-                  updateCartQuantity={updateCartQuantity}
-                  clearCart={clearCart}
+                  user={user}
+                  
                 />
               </ProtectedRoute>
             }

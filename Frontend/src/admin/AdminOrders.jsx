@@ -29,7 +29,6 @@ export default function AdminOrders() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-
     return date.toLocaleString("en-PK", {
       day: "2-digit",
       month: "short",
@@ -98,21 +97,12 @@ export default function AdminOrders() {
     };
   }, []);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <Loader2
-          className="w-12 h-12 text-orange-600 animate-spin"
-          strokeWidth={3}
-        />
-      </div>
-    );
-  }
+  // REMOVED THE TOP-LEVEL LOADING RETURN TO KEEP THE HEADER PERSISTENT
 
   return (
     <div className="min-h-screen bg-slate-50 py-12 px-4 md:px-8 font-sans text-slate-900">
       <div className="max-w-7xl mx-auto">
-        {/* HEADER SECTION */}
+        {/* HEADER SECTION - This will now stay visible during loading */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
             <h1 className="text-4xl font-black text-slate-900 tracking-tighter italic">
@@ -152,8 +142,16 @@ export default function AdminOrders() {
           </div>
         </div>
 
-        {/* ORDERS GRID */}
-        {orders.length === 0 ? (
+        {/* DYNAMIC CONTENT AREA */}
+        {loading ? (
+          /* Loader is now isolated to the content area only */
+          <div className="flex items-center justify-center py-32">
+            <Loader2
+              className="w-12 h-12 text-orange-600 animate-spin"
+              strokeWidth={3}
+            />
+          </div>
+        ) : orders.length === 0 ? (
           <div className="text-center py-32 bg-white rounded-[3rem] border-2 border-dashed border-slate-300">
             <Package
               size={64}
@@ -192,20 +190,15 @@ export default function AdminOrders() {
                         <h3 className="font-black text-xs sm:text-sm tracking-tighter">
                           ID: {order._id.slice(-8).toUpperCase()}
                         </h3>
-
-                        {/* CREATED TIME */}
                         <p className="text-[9px] text-orange-400 font-black uppercase tracking-widest">
                           Created: {formatDate(order.createdAt)}
                         </p>
-
-                        {/* UPDATED TIME */}
                         <p className="text-[9px] text-slate-300 font-black uppercase tracking-widest">
                           Updated: {formatDate(order.updatedAt)}
                         </p>
                       </div>
                     </div>
 
-                    {/* STATUS SELECT */}
                     <div className="relative w-full sm:w-auto">
                       <select
                         value={order.status}
@@ -245,11 +238,9 @@ export default function AdminOrders() {
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-1">
                           <User size={12} strokeWidth={3} /> Customer
                         </p>
-
                         <p className="text-sm font-black text-slate-900 truncate">
                           {order.user.name}
                         </p>
-
                         <p className="text-[11px] font-bold text-slate-500 truncate italic">
                           {order.user.email}
                         </p>
@@ -259,11 +250,9 @@ export default function AdminOrders() {
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-1">
                           <MapPin size={12} strokeWidth={3} /> Destination
                         </p>
-
                         <p className="text-[11px] font-black text-slate-900 leading-tight">
                           {order.address.street}, {order.address.city}
                         </p>
-
                         <p className="text-[11px] font-bold text-orange-600 flex items-center gap-1">
                           <Phone size={10} strokeWidth={3} />
                           {order.address.phone}
@@ -276,7 +265,6 @@ export default function AdminOrders() {
                       <p className="text-[10px] font-black text-slate-900 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
                         <ReceiptText size={14} strokeWidth={3} /> Manifest List
                       </p>
-
                       <div className="space-y-2 max-h-40 overflow-y-auto pr-2 custom-scrollbar">
                         {order.items.map((item) => (
                           <div
@@ -287,7 +275,6 @@ export default function AdminOrders() {
                               <span className="w-8 h-8 flex items-center justify-center bg-slate-900 text-white text-[10px] font-black rounded-lg">
                                 x{item.quantity}
                               </span>
-
                               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl overflow-hidden border-2 border-white shadow-sm flex-shrink-0">
                                 <img
                                   src={item.food.image}
@@ -295,12 +282,10 @@ export default function AdminOrders() {
                                   className="w-full h-full object-cover"
                                 />
                               </div>
-
                               <span className="font-black text-slate-800 text-xs tracking-tight">
                                 {item.food.name}
                               </span>
                             </div>
-
                             <span className="font-black text-slate-900 text-xs">
                               ${(item.food.price * item.quantity).toFixed(2)}
                             </span>
@@ -315,7 +300,6 @@ export default function AdminOrders() {
                         <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
                           Verification Status
                         </span>
-
                         <div
                           className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-lg text-[8px] font-black border ${
                             order.status === "completed"
@@ -338,7 +322,6 @@ export default function AdminOrders() {
                         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                           Grand Total
                         </p>
-
                         <div className="flex items-center justify-end text-xl sm:text-2xl font-black text-white">
                           <DollarSign
                             size={20}
