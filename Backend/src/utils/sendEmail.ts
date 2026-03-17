@@ -74,25 +74,25 @@ import {
 //   }
 // };
 
-// export const sendOrderEmail = async (to: string, order: any) => {
-//   try {
-//     // const transporter = createTransporter();
+export const sendOrderEmail = async (to: string, order: any) => {
+  try {
+    // const transporter = createTransporter();
 
-//     // await transporter.sendMail({
-//     //   from: process.env.EMAIL_USER,
-//     //   to,
-//     //   subject: "Your FoodHub Order Confirmation",
-//     //   html: orderConfirmationTemplate(order),
-//     // });
-//     const resend = new Resend(process.env.RESEND_API_KEY);
-//     await resend.emails.send({
-//       from: process.env.EMAIL_USER as string,
-//       to,
-//       subject: "Your FoodHub Order Confirmation",
-//       html: orderConfirmationTemplate(order),
-//     });
-//     console.log("Order email sent to:", to);
-//   } catch (error: any) {
-//     console.error("Order email failed", error.message);
-//   }
-// };
+    // await transporter.sendMail({
+    //   from: process.env.EMAIL_USER,
+    //   to,
+    //   subject: "Your FoodHub Order Confirmation",
+    //   html: orderConfirmationTemplate(order),
+    // });
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await resend.emails.send({
+      from: process.env.EMAIL_USER as string,
+      to,
+      subject: "Your FoodHub Order Confirmation",
+      html: orderConfirmationTemplate(order),
+    });
+    console.log("Order email sent to:", to);
+  } catch (error: any) {
+    console.error("Order email failed", error.message);
+  }
+};
